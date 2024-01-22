@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Finance Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/regression"></script>
+</head>
+<body>
+    <h1>Finance Tracker</h1>
+    <p>Select Date Range:</p>
+    <input type="date" id="fromDate">
+    <input type="date" id="toDate">
+    <button onclick="generateGraph()">Generate Graph</button>
+    <div style="width: 80%; margin: 20px;">
+        <canvas id="expenseChart"></canvas>
+    </div>
+
+    <script>
+        // Dummy data (you would fetch this from your database)
+        const expenses = [
+            { date: '2023-10-01', amount: 100, category: 'Groceries' },
+            { date: '2023-10-05', amount: 50, category: 'Entertainment' },
+            { date: '2023-10-10', amount: 75, category: 'Dining' },
+            // Add more data here...
+        ];
+
+        function generateGraph() {
+            const fromDate = document.getElementById('fromDate').value;
+            const toDate = document.getElementById('toDate').value;
+
+            // Filter data based on the selected date range
+            const filteredExpenses = expenses.filter(expense => {
+                return expense.date >= fromDate && expense.date <= toDate;
+            });
+
+            // Prepare data for the chart
+            const labels = filteredExpenses.map(expense => expense.date);
+            const data = filteredExpenses.map(expense => expense.amount);
+
+            // Create a linear regression model
+            const regression = new regression('linear', labels.map((value, index) => [new Date(value).getTime(), data[index]]));
+            const regressionData = regression.points;
+
+            // Create and render the chart
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Expense Amount',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    },
+                    {
+                        label: 'Linear Regression',
+                        data: regressionData,
+                        borderColor: 'rgba(192, 75, 75, 1)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        y: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Amount'
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

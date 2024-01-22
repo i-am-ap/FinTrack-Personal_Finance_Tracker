@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Spending Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="/media/logo2.jpg" type="image/x-icon">
+<style>
+ 
+  h1{
+    background-color: rgb(0, 139, 125);
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  label{
+    color: rgb(0, 92, 92);
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button{
+    border: none;
+    background-color: rgb(0, 145, 118);
+    color: aliceblue;
+    width: 200px;
+    border-radius: 10px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  form{
+    justify-content: center;
+    align-items: center;
+    margin-left: 250px;
+  }
+
+  input{
+    width: 200px;
+    border: none;
+    background-color: rgb(193, 237, 228);
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 10px;
+    
+  }
+
+    footer{
+      margin-top: 200px;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to right, rgb(15, 210, 148), rgb(255, 255, 255));
+
+      
+    }
+
+</style>
+
+
+</head>
+
+
+
+<body>
+  <h1>Expense Spending Graph</h1>
+  <canvas id="expenseChart" width="400" height="400"></canvas>
+
+  <!-- Create a form to input the data -->
+  <!-- <form id="expense-form">
+    <label for="category">Category:</label>
+    <input type="text" id="category" placeholder="Expense Category">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Expense Amount">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" onclick="addExpense()">Add Expense</button>
+  </form> -->
+
+  <script>
+    // let financeData = [];
+    let chart = null;
+    const financeData = JSON.parse('{{ expenses_json|escapejs }}');
+    console.log(financeData);
+updateChart()
+
+
+
+    function updateChart() {
+      if (chart) {
+        chart.destroy();
+      }
+
+      // Process data for graph
+      const categories = Array.from(new Set(financeData.map(item => item.category)));
+      console.log(categories);
+      const categoryTotals = {};
+
+      categories.forEach(category => {
+        const categoryExpenses = financeData.filter(item => item.category === category);
+        const totalAmount = categoryExpenses.reduce((acc, item) => acc + item.amount, 0);
+        categoryTotals[category] = totalAmount;
+      });
+
+      const categoryLabels = Object.keys(categoryTotals);
+      const categoryAmounts = Object.values(categoryTotals);
+
+      // Create a new bar chart
+      const ctx = document.getElementById('expenseChart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: categoryLabels,
+          datasets: [{
+            label: 'Total Expense Amount',
+            data: categoryAmounts,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Total Amount'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Expense Category'
+              }
+            }
+          }
+        }
+      });
+    }
+  </script>
+
+
+<footer>
+  <a href="/">
+    <button>
+      Go back !
+    </button>
+  </a>
+</footer>
+
+</body>
+</html>

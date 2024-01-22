@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+    <link rel="icon" href="/media/logo2.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/media/styles.css">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: left;
+            padding: 20px;
+            /* background-color: #1bb182; */
+            color: rgb(13, 111, 86);
+        }
+
+        form {
+            max-width: 600px;
+            height: 800px;
+            margin-top: 50px;
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 0px;
+            font-size: large;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form select,
+        form textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            max-width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            margin-left: 40px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            /* border-bottom: 1px solid #a40808; */
+            border-color: #08332a;
+        }
+
+        table th {
+            background-color: #098068;
+            color: white;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <header>
+        FinT₹ack
+    </header>
+    <nav class="nav-1">
+        <ul class="ul">
+            <a href="/fintrack/">HOME</a>
+        </ul>
+        <ul>
+            <a href="/login">lOG IN</a>
+        </ul>
+        <ul>
+            <a href="/signup">SIGN UP</a>
+        </ul>
+        <ul>
+            <a href="">ABOUT US</a>
+        </ul>
+        <ul>
+            <a href="/">DASHBOARD</a>
+            &nbsp;
+            
+        </ul>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <!--
+        <ul class="icons">
+            &nbsp;<a href="#"><img src="circle-phone.png" width="25px"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="linkedin.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="instagram.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="facebook.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="gmail.png" width="25"></a>
+        </ul>
+    -->
+    </nav>
+
+    <div class="main-page">
+        <ul>
+            <div class="icon-bar" id="left-half">
+                <div class="in-nav">
+                    <a href="/">
+                        <h2 style="font-size:xxx-large;">Dashboard</h2>
+                    </a>
+                    <img src="/media/www.jpg" width="100px" height="100px">
+                    <p style="font-size: 20px;">Profile</p>
+                    <div class="dash">
+
+                        <a class="active" href="#">
+                            <li class="li">Categories</li>
+                        </a>
+                        <a href="/budget">
+                            <li>Budget</li>
+                        </a>
+                        <a href="/expenseprediction">
+                            <li>Expense Prediction</li>
+                        </a>
+                        <!--<a href="#">
+                            <li>Accounts</li>
+                        </a>-->
+                        <a href="/generatereport">
+                            <li>Generate Report</li>
+                        </a>
+                        <a href="/analysis">
+                            <li>Analysis</li>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <button><a class="logout" href="/logout">Log out</a></button>
+                <div class="un-log">Create a new acc with Email id</div>
+        </ul>
+
+
+
+        <div class="categories">
+
+
+            <!-- Form to input data -->
+            <form id="dataForm" method="post" action="/addCategoriesData/">
+{% csrf_token %}
+                <h1>Income / Expense Category</h1>
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+
+                
+                <label for="categorySelect">Category:</label>
+                <input type="text" id="categorySelect" name="category" required>
+
+
+                <!-- Select input for accounts -->
+                <label for="account">Select an account:</label>
+                <select id="accountSelect" name="account">
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
+                    <option value="Account">Account</option>
+                    <option value="UPI">UPI</option>
+                </select>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <label for="time">Date:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="50"
+                    placeholder=" Add more info."></textarea>
+                    <input type="hidden" name="category_type" id="category_type" value="Income">
+                <button type="button" id="addIncomeButton">Add Income</button>
+                <button type="button" id="addExpenseButton">Add Expense</button>
+                
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="right-side">
+
+        <h1>Income / Expense List</h1>
+
+        <!-- Table to display user input -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Account</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                    <th>Category Type</th>
+                </tr>
+            </thead>
+            <tbody id="dataTable">
+              {% for entry in entries %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                  <td>{{ entry.amount }}</td>
+                  <td>{{ entry.category }}</td>
+                  <td>{{ entry.account }}</td>
+                  <td>{{ entry.date }}</td>
+                  <td>{{ entry.time }}</td>
+                  <td>{{ entry.description }}</td>
+                  <td>{{ entry.category_type }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- <footer>
+        <div class="col-1">
+            <div class="col-11">
+                <div class="col-12">
+                    hii
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="col-21">
+                <div class="col-22">
+                    hii
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="col-31">
+                <div class="col-32">
+                    hii
+                </div>
+            </div>
+        </div>
+
+
+    </footer> -->
+
+
+
+    <div class="con">
+        <h3>Contact us : fintrack@gmail.com</h3>
+    </div>
+
+
+    
+        <script>
+    document.getElementById('addIncomeButton').addEventListener('click', function() {
+        document.getElementById('category_type').value = 'Income';
+        document.querySelector('form').submit(); // Submit the form
+    });
+
+    document.getElementById('addExpenseButton').addEventListener('click', function() {
+        document.getElementById('category_type').value = 'Expense';
+        document.querySelector('form').submit(); // Submit the form
+    });
+</script>
+
+  
+
+
+</body>
+</html>
+
+
+  

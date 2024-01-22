@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link rel="icon" href="/media/logo2.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/media/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: left;
+            padding: 20px;
+            /* background-color: #1bb182; */
+            color: rgb(13, 111, 86);
+        }
+
+        form {
+            max-width: 500px;
+            height: 500px;
+            margin-top: 50px;
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 0px;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form select,
+        form textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            max-width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            margin-left: 40px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        table th {
+            background-color: #098068;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        FinT₹ack
+    </header>
+    <nav class="nav-1">
+        <ul class="ul">
+            <a href="/">HOME</a>
+        </ul>
+        <ul>
+            <a href="/login">lOG IN</a>
+        </ul>
+        <ul class="ul">
+            <a href="/signup">SIGN UP</a>
+        </ul>
+        <ul>
+            <a href="">ABOUT US</a>
+        </ul>
+        <ul>
+            <label>SEARCH :</label>
+            &nbsp;
+            <input type="search" placeholder="    Search FinT₹ack  ">
+        </ul>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <!--
+        <ul>
+            &nbsp;<a href="#"><img src="circle-phone.png" width="25px"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="linkedin.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="instagram.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="facebook.png" width="25"></a>
+            &nbsp;&nbsp;&nbsp;<a href="#"><img src="gmail.png" width="25"></a>
+        </ul>
+    -->
+    </nav>
+
+    <div class="main-page">
+        <ul class="ul">
+            <div class="icon-bar" id="left-half">
+                <div class="in-nav">
+                    <a href="/">
+                        <h2 style="font-size:xxx-large;">Dashboard</h2>
+                    </a>
+                    <img src="/media/www.jpg" width="100px" height="100px">
+                    <p style="font-size: 20px;">Profile</p>
+                    <div class="dash">
+
+                        <a class="active" href="/categories">
+                            <li class="li">Categories</li>
+                        </a>
+                        <a href="/budget">
+                            <li>Budget</li>
+                        </a>
+                        <a href="/expenseprediction">
+                            <li>Expense Prediction</li>
+                        </a>
+                        <!--<a href="#">
+                            <li>Accounts</li>
+                        </a>-->
+                        <a href="/generatereport">
+                            <li>Generate Report</li>
+                        </a>
+                        <a href="/analysis">
+                            <li>Analysis</li>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <button><a class="logout" href="/logout">Log out</a></button>
+                <div class="un-log">Create a new acc with Email id</div>
+        </ul>
+
+
+
+        <div class="categories">
+            <!-- Form to input data -->
+            <form id="dataForm" method="post" action="/limitdata/">
+              {% csrf_token %}
+                <h1>Set Budget</h1>
+
+                <label for="amount">Set Limit:</label>
+                <input type="number" id="amount" name="limit" required>
+
+
+                <label for="categorySelect">Category:</label>
+                <input type="text" id="categorySelect" name="category" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+
+                    <button type="submit" id="setbudgetbutton">Set Budget</button>
+          
+            </form>
+        </div>
+
+
+
+
+
+        <!--<img src="E-commerce.jpg" width="1200px">-->
+
+
+
+
+    </div>
+
+
+
+    <div class="right-side">
+
+        <h1>Income / Expense List</h1>
+
+        <!-- Table to display user input -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Set Limit</th>
+                    <th>Category</th>
+                    <th>Date</th>
+
+                </tr>
+            </thead>
+            <tbody id="dataTable">
+              {% for entry in entries %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                  <td>{{ entry.limit }}</td>
+                  <td>{{ entry.category }}</td>
+                  <td>{{ entry.date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- <button>
+            <a href="prediction.py">
+                Click me Sir !
+            </a>
+        </button> -->
+
+
+    </div>
+
+
+
+    <!-- <footer>
+        <div class="col-1">
+            <div class="col-11">
+                <div class="col-12">
+                    hii
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="col-21">
+                <div class="col-22">
+                    hii
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="col-31">
+                <div class="col-32">
+                    hii
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+-->
+
+
+    <div class="con">
+        <h3>Contact us : fintrack@gmail.com</h3>
+    </div>
+
+    
+
+
+</body>
+
+</html>
